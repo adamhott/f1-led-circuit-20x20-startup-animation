@@ -46,13 +46,13 @@ where
         // At least 128 bits of zeros for the start frame
         let start_frame = [0x00; 16];
 
-        // Create data frames for all 96 LEDs
-        let mut data: Vec<u8, 796> = Vec::new();
+        // Create data frames for all 216 LEDs
+        let mut data: Vec<u8, 1768> = Vec::new();
         data.extend_from_slice(&start_frame).unwrap();
 
         // Set all LEDs to off
         let off_led_frame = Self::create_led_frame(0x0000, 0x0000, 0x0000);
-        for _ in 0..96 {
+        for _ in 0..216 {
             data.extend_from_slice(&off_led_frame).unwrap();
         }
 
@@ -71,11 +71,11 @@ where
         let start_frame = [0x00; 16];
 
         // Create data frames for all 96 LEDs
-        let mut data: Vec<u8, 796> = Vec::new();
+        let mut data: Vec<u8, 1768> = Vec::new();
         data.extend_from_slice(&start_frame).unwrap();
 
         // Set the specified LEDs to the given colors and all others to off
-        for i in 1..=96 {
+        for i in 1..=216 {
             if let Some(&(_led_num, red, green, blue)) =
                 leds.iter().find(|&&(led_num, _, _, _)| led_num == i)
             {
